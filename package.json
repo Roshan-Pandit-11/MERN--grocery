@@ -1,0 +1,21 @@
+{
+  "name": "mern--grocery",
+  "version": "1.0.0",
+  "description": "This is my first change",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Roshan-Pandit-11/MERN--grocery.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Roshan-Pandit-11/MERN--grocery/issues"
+  },
+  "homepage": "https://github.com/Roshan-Pandit-11/MERN--grocery#readme"
+}
