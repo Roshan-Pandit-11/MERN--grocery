@@ -2,8 +2,8 @@
 
 
 import React, { useState } from 'react';
-import "./index.css"
-import SignUp from './SignUp';
+
+
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
