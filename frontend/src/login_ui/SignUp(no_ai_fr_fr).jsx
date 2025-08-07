@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "./index.css";
+
 
 const SignUp = () => {
   const [username, setUsername] = useState('');
@@ -10,7 +10,8 @@ const SignUp = () => {
   };
 return (
     <>
-      <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    
+      <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 h-full bg-gray-900">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             src=""//logo
@@ -78,6 +79,7 @@ return (
           </p>
         </div>
       </div>
+      
     </>
   )
 };
