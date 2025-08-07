@@ -7,7 +7,7 @@ import viteLogo from '/vite.svg'
 import Login from './login_ui/Login.jsx';
 //import SignUP from '/SignUp.jsx';
 import SignUp from './login_ui/SignUp_no_ai_fr_fr'
-import Products from ./Products/Products_page.jsx
+import Products from './Products/Products_page.jsx'
 //import './App.css'
 
 const App = () => {
