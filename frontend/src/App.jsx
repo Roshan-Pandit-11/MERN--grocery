@@ -9,7 +9,7 @@ import Login from './login_ui/Login.jsx';
 import SignUp from './login_ui/SignUp(no_ai_fr_fr).jsx'
 import Products from './Products/Products_page.jsx'
 //import './App.css'
-
+import "./index.css"
 const App = () => {
   return (
     <div>
