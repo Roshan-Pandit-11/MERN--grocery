@@ -5,7 +5,7 @@ const authentication = (req , res , next) => {
   const token = req.headers.token ;
   const verifyuser = jwt.verify(token , process.env.JWT_SECRET) ;
   if (verifyuser) {
-    req.userid = verifyuser
+    req.username = verifyuser
     next()
   }
   else{

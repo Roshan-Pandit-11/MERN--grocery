@@ -5,7 +5,8 @@ const jwt = require('jsonwebtoken') ;
 const bcrypt = require('bcrypt') ;
 require('dotenv').config() ;
 const z = require("zod") ;
-const {userModel} = require('../db') ;
+const {userModel, productModel} = require('../db') ;
+const { authentication } = require('./auth');
 
 userRouter.post('/signup' , async (req , res) => {
   const {username , password} = req.body ;
@@ -50,6 +51,19 @@ userRouter.post('/login' , async(req , res) => {
     message : "Wrong Credentials"
   })
   }
+})
+
+userRouter.get('/me' , authentication , async(req , res) => {
+  const username = req.username ;
+  const userfound = await userModel.findOne({
+    username : username
+  })
+  const myproducts = await productModel.find({
+    userid : userfound._id
+  })
+  res.json({
+    myproducts : myproducts
+  })
 })
 
 module.exports = ({

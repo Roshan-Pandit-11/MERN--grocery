@@ -7,8 +7,20 @@ const userschema = new schema ({
   password : String 
 })
 
+const productschema = new schema ({
+  name : String ,
+  image : String ,
+  description : String ,
+  price : Number ,
+  catogery : String ,
+  stock : Number ,
+  userid : objectid
+})
+
 const userModel = mongoose.model("user" , userschema) ;
+const productModel = mongoose.model("product" , productschema) ;
 
 module.exports = ({
-  userModel : userModel
+  userModel : userModel ,
+  productModel : productModel
 })
