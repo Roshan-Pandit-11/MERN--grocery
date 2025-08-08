@@ -4,7 +4,8 @@ const objectid = mongoose.Schema.ObjectId ;
 
 const userschema = new schema ({
   username : String ,
-  password : String 
+  email : String ,                                                              //added email
+  password : String
 })
 
 const productschema = new schema ({
