@@ -39,7 +39,7 @@ userRouter.post('/signup' , async (req , res) => {
 userRouter.post('/login' , async(req , res) => {
   const {username , password} = req.body ;
   const userfound = await userModel.findOne({
-    username : username
+    username : username                                                                        // ya to email ya username login me email nhi dal rha but username ko email se replace kar sakta hai
   }) ;
   const verifyUser = bcrypt.compareSync(password , userfound.password) ;
   if (verifyUser) {
