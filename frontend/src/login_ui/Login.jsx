@@ -1,24 +1,39 @@
 //unfinshed code
-
-
 import React, { useState } from 'react';
+import {useNavigate} from 'react-router-dom'
 
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [responseobj , setresponseobj] = useState('')
+  const navigate = useNavigate()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
+    const data = {
+      username : username ,
+      password : password
+    }
 
-    // For demonstration purposes:
-    alert(`Username: ${username}\nPassword: ${password}`);
+    const response = await fetch('http://localhost:3001/user/login' , {
+      method : "POST" ,
+      headers : {
+        "Content-Type": "application/json"
+      } ,
+      body : JSON.stringify(data) 
+    })
 
-    // For Reset form (unfinished)
+    const responsedata = await response.json() ;
+    setresponseobj(responsedata) ;
+    console.log(responsedata.message) ;
+    localStorage.setItem("token" , responsedata.token) ;
+    if (responsedata.token){
     setUsername('');
     setPassword('');
-
-    
+    navigate('/')
+    }
+ 
   };
 
   return (
@@ -64,7 +79,10 @@ const Login = () => {
             Login
           </button>
         </form>
-        <div className="w-full max-w-md mt-4 text-center">
+       {responseobj.token? (
+        <h1 className='text-orange-400 font-bold text-2xl flex mt-4 justify-center'>{responseobj.message}</h1>
+       ) : (
+         <div className="w-full max-w-md mt-4 text-center">
         <span className="text-gray-600">Don't have an account? </span>
         <a
           href="/SignUp"
@@ -73,6 +91,7 @@ const Login = () => {
           Sign up
         </a>
       </div>
+       )}
       </div>
       
     </div>
