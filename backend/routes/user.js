@@ -7,11 +7,13 @@ require('dotenv').config() ;
 const z = require("zod") ;
 const {userModel, productModel} = require('../db') ;
 const { authentication } = require('./auth');
+const e = require('express');
 
 userRouter.post('/signup' , async (req , res) => {
-  const {username , password} = req.body ;
+  const {username , email , password} = req.body ;                              //added email
   const user = z.object({
     username : z.string().min(4).max(15) ,
+    email : z.email().string().max(100) ,                                       //added email
     password : z.string().min(6).max(15) 
   })
   const data = user.safeParse(req.body) ;
@@ -20,6 +22,7 @@ userRouter.post('/signup' , async (req , res) => {
   const hashedpassword = bcrypt.hashSync(password , 5) ;
   await userModel.create({
     username : username ,
+    email : email ,                                                               //added email
     password : hashedpassword
   })
   res.json({
