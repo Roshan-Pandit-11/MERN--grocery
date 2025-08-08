@@ -10,10 +10,10 @@ const { authentication } = require('./auth');
 const e = require('express');
 
 userRouter.post('/signup' , async (req , res) => {
-  const {username , email , password} = req.body ;                              //added email
+  const {username , email , password} = req.body ;                               //added email
   const user = z.object({
     username : z.string().min(4).max(15) ,
-    email : z.email().string().max(100) ,                                       //added email
+    email : z.email().string().max(100) ,                                        //added email
     password : z.string().min(6).max(15) 
   })
   const data = user.safeParse(req.body) ;
