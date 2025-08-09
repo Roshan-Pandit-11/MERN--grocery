@@ -13,7 +13,7 @@ const UserAccountPage = () => {
       <div className="mt-10 max-w-4xl mx-auto bg-white shadow-xl rounded-xl p-6 space-y-6"> {/* change mt-value to increase or decrease space jab header lagega */}
         <div className="flex items-center justify-between border-b border-green-400 pb-4">
           <h2 className="text-2xl font-bold text-green-800">Personal Details</h2>
-          <button className="text-green-600 hover:text-green-800 hover:underline text-sm">Edit Profile</button>
+          <a href="#" className="text-green-600 hover:text-green-800 text-sm">Edit Profile</a>
         </div>
 
         <div className="bg-green-50 p-4 rounded-lg shadow-inner space-y-2">
