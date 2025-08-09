@@ -4,7 +4,7 @@ const objectid = mongoose.Schema.ObjectId ;
 
 const userschema = new schema ({
   username : String ,
-  email : String ,                                                              //added email
+  email : String ,                           
   password : String
 })
 
