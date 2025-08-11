@@ -9,7 +9,6 @@ const userschema = new schema ({
 })
 
 const productschema = new schema ({
-  id : Number,
   name : String ,
   image : String ,
   description : String ,
