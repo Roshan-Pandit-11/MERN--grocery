@@ -6,7 +6,7 @@ import Products from './Products/Products_page.jsx'
 import ProductInfo from './Products/productInfo.jsx';
 import UserAccountPage from './profile_page/user_profile.jsx';
 import ProductInput from './Products/productInput.jsx';
-import "./index.css"
+import "./index.css"  
 const App = () => {
   return (
     <BrowserRouter>
@@ -17,6 +17,7 @@ const App = () => {
           <Route path='/product/:id' element={<ProductInfo/>}/>
           <Route path='/profile' element={<UserAccountPage/>}/>
           <Route path='/create' element={<ProductInput/>}/>
+          <Route path='/product/edit/:id' element={<ProductInput/>}/>
       </Routes>
     </BrowserRouter>
   );

@@ -52,14 +52,16 @@ productRouter.post("/create" , authentication , uploads.single('image') , async(
   })
 })
 
-productRouter.put('/update/:id' , authentication , async (req , res) => {
+productRouter.put('/update/:id' , authentication , uploads.single('image')  ,async (req , res) => {
   const {id} = req.params ;
   const {name , description , price , catogery , stock} = req.body ;
+  const image = req.file.buffer.toString('base64') ;
 
   await productModel.findOneAndUpdate({
     _id : id
   } , {
     name : name ,
+    image : image ,
     description : description ,
     price : price ,
     catogery : catogery ,

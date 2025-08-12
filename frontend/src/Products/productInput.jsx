@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , useParams } from "react-router-dom";
 
 const ProductInput = () => {
   const [name , setname] = useState('') ;
@@ -9,19 +9,34 @@ const ProductInput = () => {
   const [stock , setstock] = useState(0) ;
   const [image , setimage] = useState(null) ;
   const [responseMsg , setresponseMsg] = useState('') ;
+  const [isedit , setisedit] = useState(false) ;
+  const [path , setpath] = useState(null) ;
   const navigate = useNavigate() ;
+
+  const {id} = useParams() ;
+  useEffect(() => {
+    if (id){
+      setisedit(true) ;
+    }else{
+      setisedit(false) ;
+    }
+  } , [])
 
   useEffect(() => {
        let timer ;
         if (responseMsg){
            timer = setTimeout(() => {
-          navigate('/') ;
+          if (path){
+            navigate(path)
+          }else{
+            navigate(path) ;
+          }
         }, 1000);
         }
         return () => {
           clearTimeout(timer) ;
         }
-      }, [responseMsg ,navigate]) ;
+      }, [path ,navigate ]) ;
 
   async function handlesubmit (e) {
     e.preventDefault() ;
@@ -33,6 +48,8 @@ const ProductInput = () => {
     formdata.append("stock" , stock) ;
     formdata.append("image" , image) ;
 
+    let responsedata ;
+    if (!isedit){
     const response = await fetch("http://localhost:3001/product/create" , {
       method : "POST" ,
       headers : {
@@ -40,22 +57,35 @@ const ProductInput = () => {
       } ,
       body : formdata  
     })
-    const responsedata = await response.json() ;
+     responsedata = await response.json() ;
+    } 
+    else{
+      const response = await fetch(`http://localhost:3001/product/update/${id}` , {
+      method : "PUT" ,
+      headers : {
+        "token" : localStorage.getItem("token") 
+      } ,
+      body : formdata  
+    })
+     responsedata = await response.json() ;
+    }
+
     setname('') ;
     setdescription('') ;
     setprice(0) ;
     setcatogery('') ;
     setstock('') ;
     setimage(null) ;
+    setisedit(false) ;
     setresponseMsg(responsedata.message) ;
-    
+    {isedit ? setpath("/profile") : setpath("/")}
   }
 
   return(
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-teal-400 via-green-500 to-lime-600 p-4">
       <div className="w-full max-w-md bg-white rounded-xl shadow-2xl p-8 transform transition-all duration-300 hover:scale-[1.01]">
         <h1 className="text-4xl font-extrabold text-center text-gray-800 mb-8 tracking-tight">
-          Post Your Grocery Item
+          {isedit ? ("Edit Your Grocery Item") : ("Post Your Grocery Item")}
         </h1>
 
         {responseMsg ? (
@@ -178,7 +208,7 @@ const ProductInput = () => {
                          flex items-center justify-center"
             >
               
-              Upload Product
+              {isedit ? ("Update Product") : ("Upload Product")}
             </button>
           </form>
         )}
